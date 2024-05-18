@@ -1,18 +1,33 @@
-FROM nvidia/cuda:11.3.1-cudnn8-devel-ubuntu20.04 as devcontainer
+FROM nvidia/cuda:12.4.1-devel-ubuntu22.04 as devcontainer
 
-ARG PYTHON_VERSION=3.8
+ARG PYTHON_VERSION=3.12
 
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
+# Use ARG to define the Python version
+ARG PYTHON_VERSION=3.10
+
+# Update package lists
+RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install various tools
+RUN apt-get update && apt-get install -y --no-install-recommends \
     cmake \
     git \
     wget \
     unzip \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python and related packages
+RUN apt-get update && apt-get install -y --no-install-recommends \
     python${PYTHON_VERSION} \
     python${PYTHON_VERSION}-dev \
     python${PYTHON_VERSION}-venv \
     python3-pip \
     && rm -rf /var/lib/apt/lists/*
+
+# Additional cleanup if necessary
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ARG USERNAME=vscode
 ARG USER_UID=1000
