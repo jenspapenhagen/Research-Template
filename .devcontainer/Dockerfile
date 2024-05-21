@@ -1,7 +1,5 @@
 FROM nvidia/cuda:12.4.1-devel-ubuntu22.04 as devcontainer
 
-ARG PYTHON_VERSION=3.12
-
 # Use ARG to define the Python version
 ARG PYTHON_VERSION=3.10
 
@@ -10,7 +8,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-# Install various tools
+# Install various core tools
+# Add more necessary high level tools below...
 RUN apt-get update && apt-get install -y --no-install-recommends \
     cmake \
     git \
