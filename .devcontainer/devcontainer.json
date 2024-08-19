@@ -1,20 +1,16 @@
 {
 	"name": "GPU Dev Container Python",
-	"build": {
-		"dockerfile": "Dockerfile",
-		"context": "..",
-		"target": "devcontainer"
-	},
-	"runArgs": [
-		"-u=1000",
-		"--gpus=all",
-		"--privileged",
-		//  Setting privileged is sometimes necessary to make GPUs visible
-		// https://bbs.archlinux.org/viewtopic.php?id=266915
-	],
+	"dockerfile": "Dockerfile",
 	"mounts": [
 		// Bind mount data here if necessary e.g.
 		//"source=/vol/biodata/data,target=${containerWorkspaceFolder}/mounted-data,type=bind"
+	],
+	"runArgs": [
+		"-u=1001",
+		"--gpus=all",
+		"--privileged"
+		//  Setting privileged is sometimes necessary to make GPUs visible
+		// https://bbs.archlinux.org/viewtopic.php?id=266915
 	],
 	"customizations": {
 		"vscode": {
@@ -24,13 +20,7 @@
 				"github.vscode-pull-request-github",
 				"njpwerner.autodocstring"
 			],
-			"settings": {
-				"python.defaultInterpreterPath": "/opt/venv/bin/python" // The venv path set from the dockerfile
-			}
-		},
-		"features": {
-			"github-cli": "latest"
-		},
+		}
 	},
 	"containerUser": "jax",
 	"shutdownAction": "none" // don't stop container on exit
