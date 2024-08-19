@@ -6,6 +6,7 @@
 		"target": "devcontainer"
 	},
 	"runArgs": [
+		"-u=1000",
 		"--gpus=all",
 		"--privileged",
 		//  Setting privileged is sometimes necessary to make GPUs visible
@@ -20,7 +21,6 @@
 			"extensions": [
 				"ms-python.python",
 				"ms-python.vscode-pylance",
-				"github.copilot",
 				"github.vscode-pull-request-github",
 				"njpwerner.autodocstring"
 			],
@@ -32,6 +32,6 @@
 			"github-cli": "latest"
 		},
 	},
-	"containerUser": "vscode",
+	"containerUser": "jax",
 	"shutdownAction": "none" // don't stop container on exit
 }
